@@ -27,9 +27,8 @@ class Bank {
 
     public boolean addAccount(Account account) {
         if (getAccountIndex(account.getName()) == -1) {
-            accounts.add(account);
-            return true;
-        } 
+            return accounts.add(account);
+        }
         return false;
     }
 
@@ -37,33 +36,27 @@ class Bank {
         if (index < 0 || index >= accounts.size()) {
             return null;
         }
-        Account account = accounts.get(index);
-        accounts.remove(account);
-        return account;
-        
+        return accounts.remove(index);
+    }
+
+    public Account removeAccountByName(String name) {
+        Account a = getAccount(name);
+        accounts.remove(a);
+        return a;
     }
 
     public boolean transfer(String senderName, String receiverName, double amount) {
-        if(getAccountIndex(senderName) == -1 || getAccountIndex(receiverName) == -1 || senderName.equals(receiverName) || amount <= 0) {
+        if (getAccountIndex(senderName) == -1 || getAccountIndex(receiverName) == -1 || senderName.equals(receiverName) || amount <= 0) {
             return false;
         }
         Account sender = getAccount(senderName);
         Account receiver = getAccount(receiverName);
-        if(sender.getBalance() < amount) {
+        if (sender.getBalance() < amount) {
             return false;
         }
         sender.withdraw(amount);
         receiver.deposit(amount);
         return true;
-    }
-
-    public Account removeAccountByName(String name) {
-        Account a = getAccount(name);
-        if (a == null) {
-            return a;
-        }
-        accounts.remove(a);
-        return a;
     }
 
     private int getAccountIndex(String name) {
@@ -75,10 +68,10 @@ class Bank {
         }
         return -1;
     }
-    
+
     private Account getAccount(String name) {
-        for(Account a : accounts) {
-            if(a.getName().equals(name)) {
+        for (Account a : accounts) {
+            if (a.getName().equals(name)) {
                 return a;
             }
         }
