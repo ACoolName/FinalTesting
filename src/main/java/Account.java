@@ -1,10 +1,10 @@
 class Account {
 
-    private String owner;
+    private String name;
     private double balance;
 
-    public Account(String owner) {
-        this.owner = owner;
+    public Account(String name) {
+        this.name = name;
         balance = 0;
     }
 
@@ -30,6 +30,10 @@ class Account {
             return true;
         }
         return false;
+    }
+    
+    public String getName() {
+        return name;
     }
 
 }
