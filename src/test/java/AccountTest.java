@@ -99,4 +99,11 @@ public class AccountTest {
         assertFalse(account.setBalance(amount1));
         assertEquals(0, account.getBalance(), 0);
     }
+    
+    @Test
+    public void getNameTest() {
+        String owner = "Marek";
+        Account account = new Account(owner);
+        assertEquals(owner, account.getName());
+    }
 }
