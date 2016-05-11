@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type"
+	  content="text/html; charset=UTF-8"></meta>
+    <title>Final assignment - Testing - Martin Gergov</title>
+    <style type="text/css">
+      body{margin:40px auto;
+           max-width:850px;
+           line-height:1.6;
+           font-size:18px;
+           color:#444;
+           padding:0 10px
+      }
+      h1,h2,h3{line-height:1.2}
+      table {
+        border-collapse: collapse;
+      }
+
+      table, th, td {
+        border: 1px solid black;
+      }
+      th, td {
+        padding: 5px;
+        text-align: left;
+      }
+      table {
+        width: 100%;
+      }
+      td {
+        height: 10px;
+        vertical-align: bottom;
+      }
+  </style>
+  </head>
+  <body>
+    <h1>Performance tools</h1>
+    <img src="profile-test-file.png" alt="" />
+    <img src="initial-profiling-dialog.png" alt="" />
+    <img src="main-dashboard.png" alt="" />
+    <img src="cpu-time-profile.png" alt="" />
+    <img src="telemetry-overview.png" alt="" />    
+    <p>
+      One of the most important performance measuring techniques is
+      the ability to get a list of function calls during execution with
+      the number of times a particular function has been called as well
+      as time it took for the calls. To activate this in Netbeans, 
+      create a runnable file/test and click on Properties:
+    </p>
+    <img src="properties-prof.png" alt="" />
+    <p>After, in Run set the <b>-prof</b> flag inside the VM Options:</p>
+    <img src="vm-args.png" alt="" />
+    <p>
+      When the file runs there will be a line in the output which
+      signifies that a <b>java.prof</b> file was created:      
+    </p>
+    <img src="dumping-cpu-prof.png" alt="" />
+    <p>Here is a list of the top functions based on number of calls:</p>
+    <table>
+      <tr>
+	<td>count</td>
+	<td>callee</td>
+	<td>caller</td>
+	<td>time</td>
+      </tr>
+      <tr>
+	<td align="right">238763</td>
+	<td>java.util.Arrays.copyOfRange([CII)[C</td>
+	<td>java.lang.String.&lt;init&gt;([CII)V</td>
+	<td align="right">272</td>
+      </tr>
+      <tr><td align="right">236257</td>
+	<td>java.util.ArrayList.ensureExplicitCapacity(I)V</td>
+	<td>java.util.ArrayList.ensureCapacityInternal(I)V</td>
+	<td align="right">224</td>
+      </tr>
+      <tr><td align="right">236015</td>
+	<td>java.util.ArrayList.ensureCapacityInternal(I)V</td>
+	<td>java.util.ArrayList.add(Ljava/lang/Object;)Z</td>
+	<td align="right">714</td>
+      </tr>
+      <tr><td align="right">235027</td>
+	<td>java.io.BufferedReader.ensureOpen()V</td>
+	<td>java.io.BufferedReader.readLine(Z)Ljava/lang/String;</td>
+	<td align="right">199</td>
+      </tr>
+      <tr><td align="right">235027</td>
+	<td>java.io.BufferedReader.readLine(Z)Ljava/lang/String;</td>
+	<td>java.io.BufferedReader.readLine()Ljava/lang/String;</td>
+	<td align="right">1818</td>
+      </tr>
+      <tr><td align="right">234938</td>
+	<td>java.io.BufferedReader.readLine()Ljava/lang/String;</td>
+	<td>utilities.FileUtilities.readFromFile(Ljava/lang/String;)Ljava/util/List;</td>
+	<td align="right">2388</td>
+      </tr>
+      <tr><td align="right">234937</td>
+	<td>java.util.ArrayList.add(Ljava/lang/Object;)Z</td>
+	<td>utilities.FileUtilities.readFromFile(Ljava/lang/String;)Ljava/util/List;</td>
+	<td align="right">1224</td>
+      </tr>
+      <tr><td align="right">234748</td>
+	<td>java.lang.String.&lt;init&gt;([CII)V</td>
+	<td>java.io.BufferedReader.readLine(Z)Ljava/lang/String;</td>
+	<td align="right">726</td>
+      </tr>
+      <tr><td align="right">15262</td>
+	<td>java.lang.String.charAt(I)C</td>
+	<td>java.io.UnixFileSystem.normalize(Ljava/lang/String;)Ljava/lang/String;</td>
+	<td align="right">20</td>
+      </tr>
+      <tr><td align="right">12082</td>
+	<td>java.lang.String.charAt(I)C</td>
+	<td>java.io.DataOutputStream.writeUTF(Ljava/lang/String;Ljava/io/DataOutput;)I</td>
+	<td align="right">11</td>
+      </tr>
+      <tr><td align="right">10683</td>
+	<td>java.lang.AbstractStringBuilder.ensureCapacityInternal(I)V</td>
+	<td>java.lang.AbstractStringBuilder.append(C)Ljava/lang/AbstractStringBuilder;</td>
+	<td align="right">12</td>
+      </tr>
+      <tr><td align="right">9631</td>
+	<td>java.lang.AbstractStringBuilder.append(C)Ljava/lang/AbstractStringBuilder;</td>
+	<td>java.lang.StringBuffer.append(C)Ljava/lang/StringBuffer;</td>
+	<td align="right">31</td>
+      </tr>
+      <tr><td align="right">9509</td>
+	<td>java.lang.String.charAt(I)C</td>
+	<td>org.apache.tools.ant.util.DOMElementWriter.encode(Ljava/lang/String;Z)Ljava/lang/String;</td>
+	<td align="right">7</td>
+      </tr>
+      <tr><td align="right">9508</td>
+	<td>org.apache.tools.ant.util.DOMElementWriter.isLegalCharacter(C)Z</td>
+	<td>org.apache.tools.ant.util.DOMElementWriter.encode(Ljava/lang/String;Z)Ljava/lang/String;</td>
+	<td align="right">9</td>
+      </tr>
+      <tr><td align="right">9508</td>
+	<td>java.lang.StringBuffer.append(C)Ljava/lang/StringBuffer;</td>
+	<td>org.apache.tools.ant.util.DOMElementWriter.encode(Ljava/lang/String;Z)Ljava/lang/String;</td>
+	<td align="right">58</td>
+      </tr>
+      <tr><td align="right">7399</td>
+	<td>java.lang.Math.min(II)I</td>
+	<td>java.util.Arrays.copyOfRange([CII)[C</td>
+	<td align="right">11</td>
+      </tr>
+      <tr><td align="right">5805</td>
+	<td>java.io.ByteArrayOutputStream.ensureCapacity(I)V</td>
+	<td>java.io.ByteArrayOutputStream.write(I)V</td>
+	<td align="right">8</td>
+      </tr>
+   </table>
+  </body>
+</html>
