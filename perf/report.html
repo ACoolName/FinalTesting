@@ -3,7 +3,7 @@
     <head>
     <meta http-equiv="content-type"
 	  content="text/html; charset=UTF-8"></meta>
-    <title>Final assignment - Testing - Martin Gergov</title>
+    <title>Final assignment - Testing</title>
     <style type="text/css">
       body{margin:40px auto;
            max-width:850px;
@@ -35,11 +35,20 @@
   </head>
   <body>
     <h1>Performance tools</h1>
+    <p>
+      Netbeans contains a builtin cpu/memory profiler that produces
+      general statistics about the cpu and memory usage over time.
+      It also has useful statistics about threads allocated during runtime,
+      classes loaded, etc. The following screenshots give a step-by-step tutorial 
+      on how to get the statistics. The target here is a unit test that tests reading a large file.
+    </p>
     <img src="profile-test-file.png" alt="" />
     <img src="initial-profiling-dialog.png" alt="" />
     <img src="main-dashboard.png" alt="" />
-    <img src="cpu-time-profile.png" alt="" />
     <img src="telemetry-overview.png" alt="" />    
+    <p>
+      As we can see nothing out of the ordinary for such a simple test.
+    </p>
     <p>
       One of the most important performance measuring techniques is
       the ability to get a list of function calls during execution with
@@ -150,5 +159,25 @@
 	<td align="right">8</td>
       </tr>
    </table>
+    <p>
+      We can see that java.util.Arrays.copyOfRange is the most called
+      method, because we are transfering a file from the filesytem to
+      RAM with ArrayList and every time we read a line a call to
+      ArrayList.add is made so reading large files like that would be
+      time-consuming. One solution is to make a method that reads only
+      one line like that and returns. That would significantly improve
+      performance if we want to read the title of something for
+      example.  Another way would be to know the file size in advance
+      so we can prepare an adequate memory structure to hold it so we
+      don't waste time allocating RAM. Finally caching could
+      dramatically reduce delay for further uses or reading similar
+      files, for example: read file, devide into appropriate sections,
+      hash sections(or part of them) and create a meta file that
+      contains hashes and byte ranges, read another file, read meta
+      file of other file, if sections match - assemble file from cache
+      without actually doing I/O on the file. In any case cathing
+      bottlenecks is extreamly easy with a view like that, the hard part
+      then is coming up with a solution to eliminate them.
+    </p>
   </body>
 </html>
