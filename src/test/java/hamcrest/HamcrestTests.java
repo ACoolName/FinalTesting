@@ -7,6 +7,7 @@ package hamcrest;
 
 import static hamcrest.DivisibleBy.divisibleBy;
 import static hamcrest.IsEven.*;
+import static hamcrest.IsPrime.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import org.junit.After;
@@ -44,5 +45,17 @@ public class HamcrestTests {
    public void divisibleByFailTest() throws Exception {
        Integer divisor = 17;
        assertThat(divisor, is(not(divisibleBy(3))));
+   }
+   
+   @Test
+   public void isPrimePassTest() {
+       Integer prime = 17;
+       assertThat(prime, isPrime());
+   }
+   
+   @Test
+   public void isPrimeFailTest() {
+       Integer prime = 20;
+       assertThat(prime, not(isPrime()));
    }
 }
